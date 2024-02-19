@@ -31,6 +31,12 @@ const Board:React.FC = () => {
       <Square value={squares[i]} fraction={fraction} onClick={()=>handleClick(i)}/>
     )
   }
+  const checkEmpty = (board:string[]):boolean => {
+    for (const el of board) {
+      if (el) return false
+    }
+    return true
+  }
   
   const winner = calculateWinner(squares)
   let status = ''
@@ -45,9 +51,13 @@ const Board:React.FC = () => {
     handleClick(botIndex)
   }
   if (playerChar != 'X' && xIsNext && !winner) {
-    const botIndex = findBestMove(squares,'X')
+    let botIndex
+    if (checkEmpty(squares)) {
+      botIndex = Math.floor(Math.random()*squares.length)
+    } else botIndex = findBestMove(squares,'X')
     handleClick(botIndex)
   }
+  
   const setBoard = (n:number) => {
     setSquares(Array(n).fill(''))
     setXIsNext(true)

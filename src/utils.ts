@@ -1,7 +1,7 @@
 import { chooseCombination } from "./winCombinations";
 
 function minimax(board:string[],  isMaximizing:boolean,pov:string,alpha:number,beta:number,depth:number) {
-  if (depth == 3) return 10
+  if (depth == 1) return 10
   const scoreWinner = evaluate(board,pov);
   if (scoreWinner == 10 || scoreWinner == -10) {
     return scoreWinner
